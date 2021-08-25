@@ -1,0 +1,8 @@
+--se crea un script ddl para la creacion de los objetos de la base de datos
+1.  SE CREAN LAS TABLAS SIN NINGUN TIPO DE CONSTRAINT, SOLAMENTE CON LA
+    RESTRICCION NATURAL O SEA TIPO DE DATOS Y TAMAÑO
+2.  SE ALTERAN LAS TABLAS PARA ADICIONAR LOS CONSTRAINT A LAS COLUMAS QUE 
+    LOS TENGAN RESTRICCION
+
+
+// estudiar normalizacion en bases de datos
