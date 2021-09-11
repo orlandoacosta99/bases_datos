@@ -1,40 +1,35 @@
 
+/*Crear una base de datos*/
 /*
+create database xxxxx charset utf8;
 
-create database Laboratorio charset utf8;
-drop table if exists facturas
+//mirar la base
+show databases;
 
+// eliminar la base de datos -no recomendado sin tener copia
+drop database xxxxx;
+
+
+
+// seleccionar la base 
+use xxxx 
+// crear una tabla con datos 
 */
-use Laboratorio
-
- create table Facturas(
-	Letras char  not null,
-	Numero integer  not null,
-	ClienteID integer,
-	ArticuloID integer,
-	Fecha date,
-	Monto double,	
-	primary key(Letras, Numero)
+ create table Productos(
+	id_Productos int (11) unsigned not null AUTO_INCREMENT primary key, // llabe primaria
+	Nombre varchar(50) not null,
+	Precio double,
+	Marca Varchar(60) not null,
+	Stock int (6) not null,
+	Disponible boolean default false
   )
-  
-
-
-  create table Articulos(
-  	ArticuloID integer unsigned not null AUTO_INCREMENT primary key,
-  	Nombre varchar(50),
-  	Precio double,
-  	Stock integer
-  	
-  )
-  
-  create table Clientes (
-  	ClienteID integer  unsigned not null AUTO_INCREMENT primary key,
-  	Nombre varchar(50),
-  	Apellido varchar(50),
-  	Cuit char(16),
-  	Dirreccion varchar(50),
-  	Comentarios varchar(50) 	
-  	
-  )
+// eliminar una tabla 
+ drop table xxxx 
+ // condicion si existe 
+ drop table if exists xxxxx
+// ver los datos de la tabla 
+ select * from productos;
+// Deja ver una descripcion de la tabla  
+describe productos 
   
   
