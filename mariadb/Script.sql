@@ -27,4 +27,8 @@ use xxxx
  drop table xxxx 
  // condicion si existe 
  drop table if exists xxxxx
+// ver los datos de la tabla 
+ select * from productos;
+// Deja ver una descripcion de la tabla  
+describe productos 
  
