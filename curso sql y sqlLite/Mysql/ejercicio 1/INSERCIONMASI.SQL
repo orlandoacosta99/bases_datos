@@ -33,7 +33,7 @@ SELECT Nombre, Apellido, Documento FROM Inscripciones;
 SELECT Nombre, Apellido FROM Inscripciones
 ORDER BY Nombre, Apellido;
 
---order by ayuda a ordenar 
+--order by ayuda a ordenar de forma asendente 
 
 SELECT Nombre FROM Inscripciones
 ORDER BY Nombre;
@@ -42,3 +42,58 @@ ORDER BY Nombre;
 
 SELECT distinct Nombre FROM Inscripciones
 ORDER BY Nombre;
+
+
+--order by ayuda a ordenar de forma decendente
+
+SELECT Nombre, Apellido FROM Inscripciones
+ORDER BY Nombre desc, Apellido ASC;
+
+--- ORDENAR FILTRO
+
+SELECT * FROM Inscripciones 
+wHERE Materia = 'Matematica';
+
+SELECT * FROM Inscripciones 
+wHERE Materia = 'Matematica' and Asignatura = ' Algebra Lineal';
+
+SELECT * FROM Inscripciones 
+wHERE (Materia = 'Matematica' and Asignatura = ' Algebra Lineal')
+Or Materia = 'Fisica';
+
+-- seleciona los estudiantes de la nota sea >=8 y que sea la asignatura programacion
+
+
+SELECT * FROM Cursos
+wHERE Nota>=8 AND asignatura = 'Programacion';
+
+
+
+SELECT * FROM Cursos
+wHERE Nota>=8 AND (Asignatura = 'Programacion' 
+or Asignatura = 'Termodinamica');
+
+
+SELECT * FROM Cursos
+wHERE (Nota>=9 AND Asignatura = 'Programacion') 
+or (Nota <=3 AND Asignatura = 'Termodinamica');
+
+--- cosultar asignatura con auto completado %% son comodines
+
+SELECT * FROM Cursos
+wHERE Asignatura Like 'Prog%';
+
+
+SELECT * FROM Cursos
+wHERE Asignatura Like '%am%';
+
+
+-- consulta de un limite de resultados 
+
+
+SELECT * FROM Inscripciones 
+Limit 10;
+
+
+
+
