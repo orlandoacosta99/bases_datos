@@ -1,107 +1,178 @@
-create database Ejemplo1; 
+create database AdministracionCursos; 
 
 /*seleccionamos la base que vamos a utilizar*/
-use ejemplo1;
+use AdministracionCursos; 
 
 /*creacion de las 5 tablas*/
-create table Materias 
+create table materias 
 (   
-    id_materia int not null auto_increment,
+    idMateria int not null auto_increment,
     Materia varchar(30) not null unique, 
-    Primary key (id_materia)
+    Primary key (idMateria)
 ); 
 
-create table Asignaturas 
+create table asignaturas 
 (
-    id_Asignatura int not null auto_increment,
-    asignatura varchar(30) not null,
-    materia_asignatura int not null, 
-    primary key (id_asignatura), 
-    foreign key (materia_asignatura) references Materias(id_materia)
+    idAsignatura int not null auto_increment,
+    Asignatura varchar(30) not null,
+    MateriaAsignatura int not null, 
+    primary key (idAsignatura), 
+    foreign key (MateriaAsignatura) references Materias(idMateria)
 ); 
 
-create table Cursos
+create table cursos
 (
-    id_Curso int not null auto_increment, 
+    idCurso int not null auto_increment, 
     Nombre varchar(30) not null, 
-    asignatura_curso int not null, 
-    primary key (id_curso), 
-    foreign key (asignatura_curso) references Asignaturas (id_asignatura)
+    AsignaturaCurso int not null, 
+    primary key (idCurso), 
+    foreign key (AsignaturaCurso) references Asignaturas (idAsignatura)
 ); 
 
-create table Estudiantes (
-    id_estudiante int not null auto_increment, 
+create table estudiantes (
+    idEstudiante int not null auto_increment, 
     Documento varchar(15) not null unique, 
     Nombre varchar(30), Apellido varchar(30), 
-    Fecha_Nacimiento date, 
-    Edad smallint, FechaIngreso Date, Primary key (id_estudiante)
+    FechaNacimiento date, 
+    Edad smallint, FechaIngreso Date, Primary key (idEstudiante)
 ); 
 
-create table Inscripciones 
+create table inscripciones 
 (
-    id_inscripciones_curso int not null auto_increment, 
-    Estudiante_Inscrito int not null, 
-    Curso_Inscrito int not null, 
-    Primary key (id_inscripciones_curso), 
-    foreign key (Estudiante_Inscrito) references Estudiantes (id_estudiante), 
-    foreign key (Curso_Inscrito) references Cursos(id_curso)); 
+    idInscripcionesCurso int not null auto_increment, 
+    EstudianteInscrito int not null, 
+    CursoInscrito int not null, 
+    Primary key (idInscripcionesCurso), 
+    foreign key (EstudianteInscrito) references Estudiantes (idEstudiante), 
+    foreign key (CursoInscrito) references Cursos(idCurso)
+); 
 
 /*Ingresando datos a las tablas */
+
+
+INSERT INTO Materias (Materia) VALUES ('Informatica'),('Matematica'); 
+/* visualizamos la tabla*/
+select *  from Materias;
+
 Insert INTO Asignaturas 
-(Asignatura, Materia_Asignatura) values ('Cálculo 1', 1), ('Geometria', 1), ('Programacion', 2); 
+(Asignatura, MateriaAsignatura) values ('Cálculo 1', 1), ('Geometria', 1), ('Programacion', 2); 
 
+select *  from Asignaturas;
+
+
+-- si queremos ver el nombre de la asignatura
+
+Select Asignaturas.asignatura from Asignaturas;
+
+-- id y nombre 
+
+select idAsignatura, asignatura  from Asignaturas;
+-- o se puede utilizar asi select Asignaturas.idAsignatura, Asignaturas.asignatura  from Asignaturas;
+
+-- visualizar marterias y asignaturas 
+
+select Materias.Materia, Asignaturas.Asignatura 
+from Materias, Asignaturas
+where  Asignaturas.materiaAsignatura = Materias.idMateria;
+
+-- visualizacion con id
+Select Materias.idMateria, Materias.Materia, Asignaturas.idAsignatura, Asignaturas.Asignatura 
+from Materias, Asignaturas 
+where Materias.idMateria = Asignaturas.materiaAsignatura; 
+
+ 
+-- ordenando los datos
+Select Materias.idMateria, Materias.Materia, Asignaturas.idAsignatura, Asignaturas.Asignatura 
+from Materias, Asignaturas 
+where Materias.idMateria =  Asignaturas.materiaAsignatura 
+order by Materia, Asignatura; 
+
+ 
+
+--- Ingreso de los datos cursos 
 Insert into Cursos
-(Nombre, asignatura_curso) values ('Cálculo complejos', 1), ('Java', 3), ('Pascal', 3); 
+(Nombre, asignaturacurso) values ('Cálculo complejos', 1), ('Java', 3), ('Pascal', 3); 
+
+-- Busqueda de 3 tablas 
+
+Select  Materias.Materia, Asignaturas.Asignatura, Cursos.Nombre as Curso from Materias, Asignaturas, Cursos  
+where Asignaturas.materiaAsignatura = Materias.idMateria and Cursos.asignaturaCurso = Asignaturas.idAsignatura; 
+
+
+-- BUSQUEDAS  
+
+select Materias.Materia, count(*) from Materias, Asignaturas  
+where asignaturas.materiaAsignatura = Materias.idMateria group by materias.Materia; 
+
+-- Rectificamos que sea verdadero 
+Select  Materias.Materia, Asignaturas.Asignatura from Materias, Asignaturas
+where Asignaturas.materiaAsignatura = Materias.idMateria
+
+-- contar la cantidad de asignaturas
+select Materias.Materia, count(*) as 'Cantidad Asignaturas' from Materias, Asignaturas
+where Materias.idMateria = Asignaturas.MateriaAsignatura
+Group by  Materias.Materia;
+'
+
+-- funcion de curdate de nos indica el dia, año y mes actual
+
+
+insert into estudiantes (documento, Nombre, Apellido, Edad, FechaIngreso) 
+values( '123545654', 'Vladimir', 'Rodriguez', 32, curdate()), ('1235452353', 'Juan', 'Rodriguez', 32, curdate());
+
+select * from estudiantes;
+
+-- inscribimos al estudiante mediante el ultimo inscrito
 
 insert into inscripciones
-(Estudiante_Inscrito, Curso_Inscrito) values ( last_insert_id(), 1); 
+(EstudianteInscrito, CursoInscrito) values ( last_insert_id(), 1); 
 
-insert into estudiantes 
-(documento, Nombre,Apellido, Edad, FechaIngreso) values( '123545654', 'Vladimir', 'Rodriguez', 32, curdate()), ('1235452353', 'Juan', 'Rodriguez', 32, curdate());
+select * from inscripciones;
 
 insert into inscripciones
-(Estudiante_Inscrito, Curso_Inscrito) values ( last_insert_id(), 2); 
+(EstudianteInscrito, CursoInscrito) values ( last_insert_id(), 2); 
 
 /*mirar los datos de las tablas*/
-select id_Adignatura, Asignatura 
+
+select idAdignatura, Asignatura 
     from Asignaturas;
 
-select Asignaturas.id_asignatura, Asignaturas.asignatura 
+select Asignaturas.idasignatura, Asignaturas.asignatura 
     from Asignaturas; 
 
 Select Materias.Materia Materias.Materia, Asignaturas.Asignatura 
     from Materias, Asignaturas 
-    where Materias.id_materia =  Asignaturas.materia_asignatura; 
+    where Materias.idmateria =  Asignaturas.materiaAsignatura; 
 
-Select Materias.id_Materia, Materias.Materia, Asignaturas.id_Asignatura, Asignaturas.Asignatura 
+Select Materias.idMateria, Materias.Materia, Asignaturas.idAsignatura, Asignaturas.Asignatura 
     from Materias, Asignaturas 
-    where Materias.id_materia =  Asignaturas.materia_asignatura; 
+    where Materias.idmateria =  Asignaturas.materiaasignatura; 
 
-Select Materias.id_Materia, Materias.Materia, Asignaturas.id_Asignatura, Asignaturas.Asignatura 
+Select Materias.idMateria, Materias.Materia, Asignaturas.idAsignatura, Asignaturas.Asignatura 
     from Materias, Asignaturas 
-    where Materias.id_materia =  Asignaturas.materia_asignatura 
+    where Materias.idMateria =  Asignaturas.materiaasignatura 
     order by Materia, Asignatura; 
 
 Select  Materias.Materia,  Asignaturas.Asignatura, Cursos.Nombre 
     from Materias, Asignaturas, Cursos 
-    where Asignaturas.materia_asignatura = Materias.id_materia and Cursos.asignatura_curso = Asignaturas.id_asignatura; 
+    where Asignaturas.materiaasignatura = Materias.idmateria and Cursos.asignaturacurso = Asignaturas.idasignatura; 
 
 select Materias.Materia, count(*) 
     from Materias, Asignaturas  
-    where  asignaturas.materia_asignatura = Materias.id_materia 
-    group by materias.Materia; 
+    where  asignaturas.materiaasignatura = Materias.idmateria 
+    group by materias.Materia;
 
 select Materias.Materia,Asignaturas.Asignatura 
     from Materias, Asignaturas  
-    where  Materias.id_materia = asignaturas.materia_asignatura; 
+    where  Materias.idmateria = asignaturas.materiaasignatura; 
 
 select * from estudiantes; 
 
 select Materias.Materia, Asignaturas.asignatura, Cursos.Nombre as curso, Estudiantes.Documento, Estudiantes.Nombre, Estudiantes.Apellido 
     from Materias, asignaturas, cursos, inscripciones, estudiantes
-    where Materias.id_materia = asignaturas.materia_asignatura and asignaturas.id_asignatura =cursos.asignatura_curso and  
-          cursos.id_Curso = inscripciones.Curso_Inscrito and  estudiantes.id_estudiante = inscripciones.Estudiante_Inscrito; 
+    where Materias.idmateria = asignaturas.materiaasignatura and asignaturas.idasignatura =cursos.asignaturacurso and  
+          cursos.idCurso = inscripciones.CursoInscrito and  estudiantes.idestudiante = inscripciones.EstudianteInscrito; 
 
- 
+
 
 

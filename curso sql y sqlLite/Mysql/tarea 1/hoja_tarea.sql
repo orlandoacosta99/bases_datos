@@ -27,7 +27,7 @@ create table Cursos
     Docente int (11) not null, 
     Puntaje int(11),
     Asignatura_Curso int (11) not null,
-    Edificio int (11),
+    Edicion int (11),
     Anno int(11),
     Eliminado tinyint (4), 
     Estado_ENUM VARCHAR(30) NOT NULL, 
@@ -90,5 +90,11 @@ create table Examenes (
     foreign key (Curso) references Cursos(id_Curso)
 ); 
 
+alter table Materias add Eliminado tinyint(4);
 
+alter table Asignaturas add Eliminado tinyint(4);
+
+alter table Cursos add Docente varchar(30), Puntaje int(11), Edicion int (11), Anno int(11), Eliminado Tinyint (4), Estado ENUM VARCHAR (30);
+
+alter table Estudiantes add Eliminado tinyint(4);
 
