@@ -112,7 +112,7 @@ where Asignaturas.materiaAsignatura = Materias.idMateria
 select Materias.Materia, count(*) as 'Cantidad Asignaturas' from Materias, Asignaturas
 where Materias.idMateria = Asignaturas.MateriaAsignatura
 Group by  Materias.Materia;
-'
+
 
 -- funcion de curdate de nos indica el dia, año y mes actual
 
@@ -172,6 +172,7 @@ select Materias.Materia, Asignaturas.asignatura, Cursos.Nombre as curso, Estudia
     from Materias, asignaturas, cursos, inscripciones, estudiantes
     where Materias.idmateria = asignaturas.materiaasignatura and asignaturas.idasignatura =cursos.asignaturacurso and  
           cursos.idCurso = inscripciones.CursoInscrito and  estudiantes.idestudiante = inscripciones.EstudianteInscrito; 
+
 
 
 
