@@ -49,5 +49,47 @@ inner join estudiantes on estudiantes.idEstudiante = inscripciones.estudianteIns
 
 
 
+Select * from administracioncursos.asignaturas;
+
+select Materias.materia, Asignaturas.asignatura
+from materias, asignaturas
+where materias.idMateria = Asignaturas.MateriaAsignatura;
+
+
+
+Select Materias.materia, Asignaturas.asignatura
+from materias
+Left JOIN Asignaturas On Materias.idMAteria = Asignaturas.MateriaAsignatura;
+--Inner JOIN Asignaturas On Materias.idMAteria = Asignaturas.MateriaAsignatura;
+--Right JOIN Asignaturas On Materias.idMAteria = Asignaturas.MateriaAsignatura;
+
+
+SELECT Materias.Materia, Asignaturas.Asignatura, Cursos.Nombre as Curso
+FROM Materias
+LEFT JOIN Asignaturas On Materias.idMAteria = Asignaturas.MateriaAsignatura
+LEFT JOIN Cursos On Asignaturas.idAsignatura = Cursos.AsignaturaCurso;
+
+SELECT Materias.Materia, Asignaturas.Asignatura, Cursos.Nombre as Curso
+FROM Materias
+RIGHT JOIN Asignaturas On Materias.idMAteria = Asignaturas.MateriaAsignatura
+RIGHT JOIN Cursos On Asignaturas.idAsignatura = Cursos.AsignaturaCurso;
+
+
+Select * from administracioncursos.materias;
+
+SELECT Materias.Materia, Asignaturas.Asignatura 
+From Materias, Asignaturas
+where Materias.idMATERIA = Asignaturas.MateriaAsignatura;
+
+
+CREATE Table MateriasYAsignaturas(
+    id int AUTO_INCREMENT,
+    Materia VARCHAR(15),
+    Asignatura VARCHAR(15),
+    PRIMARY key(id)
+);
+
+
+
 
 

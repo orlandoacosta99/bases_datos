@@ -1,6 +1,9 @@
 
 --coneccion por terminal a root
 Mysql –u root –p  
+
+-- coneccion cuando el puerto es diferente mysql -u root -p -P 3316
+
  -- crear un usuario
  Create user 'admin'@'localhost' identified by '1234'; 
 
