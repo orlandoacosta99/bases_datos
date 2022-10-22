@@ -34,6 +34,6 @@ select especies.nombre from especies
 where Nombre REGEXP 'A|B{1}'
 order by Nombre;
 
-
-
+---copia de ña base
+mysqldump -u Camilo -p -P 3316 pokemondb > "D:\Scrippokemondb"
 

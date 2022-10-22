@@ -35,10 +35,63 @@ INNER JOIN listaEvoluciones on PreevolucionEspecie.idEspecies = listaEvoluciones
 INNER JOIN Especies as EvolucionEspecie on EvolucionEspecie.idEspecies = listaEvoluciones.Evolucion;
 
 
+--- variables de sql
+
+SHOW DATABASE;
+
+use pokemondb;
+ 
+SELECT Count(*) as cantidad from Especies;
 
 
+SELECT @MisEspecies := COUNT(*) from Especies;
+
+create table cantidades (
+    id int AUTO_INCREMENT PRIMARY KEY,
+    cant int
+
+);
+
+INSERT INTO Cantidades (cant) values(@MisEspecies);
+
+SELECT COUNT(Nombre) as Pikachus 
+from Especies 
+WHERE Nombre= 'Pikachu';
+
+SELECT COUNT(Nombre) as Raichu 
+from Especies 
+WHERE Nombre= 'Raichu';
 
 
+SELECT @MisRaichu := COUNT(*)
+from Especies
+WHERE Nombre= 'Raichu';
+
+INSERT INTO Cantidades (cant) values(@MisRaichu);
+
+
+SELECT * from Cantidades;
+ 
+
+Select Nombre From Especies Where idEspecies<=@MisRaichu;
+
+set @NombrePokemon = 'Pikachu';
+
+/*
+SELECT @MisRaichu := COUNT(Nombre)
+from Especies
+WHERE Nombre = @NombrePokemon;*/
+
+--mirar lo que tiene una variable
+SELECT @NombrePokemon;
+
+set @NombrePokemon = 10;
+
+SELECT @SinTipo2 := COUNT(*) FROM Especies WHERE Tipo2 is NULL;
+
+set @Contipo2 = @MisEspecies-@SinTipo2;
+
+SELECT @Contipo2;
 
 
 

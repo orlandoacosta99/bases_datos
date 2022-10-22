@@ -77,6 +77,7 @@ RIGHT JOIN Cursos On Asignaturas.idAsignatura = Cursos.AsignaturaCurso;
 
 Select * from administracioncursos.materias;
 
+USE administracioncursos;
 SELECT Materias.Materia, Asignaturas.Asignatura 
 From Materias, Asignaturas
 where Materias.idMATERIA = Asignaturas.MateriaAsignatura;
@@ -88,6 +89,14 @@ CREATE Table MateriasYAsignaturas(
     Asignatura VARCHAR(15),
     PRIMARY key(id)
 );
+
+
+SELECT * FROM MateriasYAsignaturas;
+-- incersion por una consulta de otra tabla
+INSERT INTO MateriasYAsignaturas (MATERIA, ASIGNATURA) 
+SELECT Materias.Materia, Asignaturas.Asignatura 
+From Materias, Asignaturas
+where Materias.idMATERIA = Asignaturas.MateriaAsignatura;
 
 
 
