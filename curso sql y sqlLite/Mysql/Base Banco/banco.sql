@@ -28,6 +28,11 @@ CREATE Table MovimientosCuenta(
     Foreign Key (idCuentaMovimiento) REFERENCES CuentasCliente(idCuenta)
 );
 
+CREATE TABLE ControlClientes(idcontrolClientes INT auto_increment PRIMARY KEY,
+idcliente INT NOT null,
+fecha date nOT nULL,
+FOREIGN KEY (IdCLiente) REFERENCES Clientes(idCliente));
+
 
 insert INTO clientes (Documento, Nombre, Apellido) VALUES
     ('123456', 'Camilo', 'Acosta'),
@@ -93,3 +98,4 @@ INSERT INTO movimientoscuenta (idCuenta,Retiro,Movimiento,idCuentaMovimiento,Mon
     (2,0,1,1,500);
 COMMIT; --envia transaccion
 ROLLBACK;--devuelve los cambios de la transaccion 
+

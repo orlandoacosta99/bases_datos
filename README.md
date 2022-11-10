@@ -1,1 +1,1 @@
-# bases_datos
+# ejejrcicios y configuracion de bases de datos
